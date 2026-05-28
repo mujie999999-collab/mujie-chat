@@ -707,7 +707,7 @@
 //  3. 將金鑰貼入下方 GEMINI_API_KEY = '你的金鑰'
 //     或直接在頁面上方輸入框輸入（會存入瀏覽器）
 // ════════════════════════════════════════════════════
-const GEMINI_API_KEY_HARDCODED = 'AIzaSyA4W3vcPWs3nES1GUxC6-hFJ2ZO4uiNC9Q'; // Gemini API Key
+const OPENROUTER_API_KEY = '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';
 
 const SYSTEM_PROMPT = `你是「小沐」，沐頡景觀設計有限公司的專業客服助理兼景觀顧問。
 語氣親切、專業、有溫度，像一位有經驗的景觀顧問朋友。
@@ -753,29 +753,13 @@ const SYSTEM_PROMPT = `你是「小沐」，沐頡景觀設計有限公司的專
 - 遇超出範疇問題，禮貌回應並引導回景觀服務`;
 
 // ── State ──
-let geminiApiKey = GEMINI_API_KEY_HARDCODED || localStorage.getItem('gemini_api_key') || '';
-let history = []; // { role: 'user'|'model', parts: [{text}] }
+let history = []; // OpenRouter 格式 {role, content}
 
 // ── Init ──
 document.getElementById('greetTime').textContent = getTime();
-checkApiKey();
-
-function checkApiKey() {
-  if (!geminiApiKey) {
-    document.getElementById('setupBanner').classList.add('show');
-    document.getElementById('apiSetup').classList.add('show');
-  }
-}
 
 function saveApiKey() {
-  const val = document.getElementById('apiKeyInput').value.trim();
-  if (!val) { alert('請輸入 API 金鑰'); return; }
-  if (!val.startsWith('AIza')) { alert('金鑰格式不正確，應以 AIza 開頭'); return; }
-  geminiApiKey = val;
-  localStorage.setItem('gemini_api_key', val);
-  document.getElementById('setupBanner').classList.remove('show');
-  document.getElementById('apiSetup').classList.remove('show');
-  appendMsg('ai', '✅ API 金鑰設定成功！小沐已就位，請問有什麼景觀問題想了解呢？🌿');
+  // 保留相容性，不需要操作
 }
 
 // ── Helpers ──
@@ -828,40 +812,35 @@ function quickAsk(text) {
   sendMsg();
 }
 
-// ── Gemini API Call ──
+// ── OpenRouter API Call ──
 async function sendMsg() {
-  if (!geminiApiKey) {
-    alert('請先輸入 Gemini API 金鑰（頁面上方）');
-    document.getElementById('setupBanner').classList.add('show');
-    document.getElementById('apiSetup').classList.add('show');
-    return;
-  }
   const inp = document.getElementById('msgInput');
   const text = inp.value.trim();
   if (!text) return;
   inp.value = ''; inp.style.height = 'auto';
 
   appendMsg('user', text);
-  history.push({ role: 'user', parts: [{ text }] });
+  history.push({ role: 'user', content: text });
   showTyping();
 
   try {
-    // Gemini 1.5 Flash — 每天 1500 次免費
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiApiKey}`;
-
-    const body = {
-      system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-      contents: history,
-      generationConfig: {
-        maxOutputTokens: 500,
-        temperature: 0.7
-      }
-    };
-
-    const res = await fetch(endpoint, {
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'HTTP-Referer': 'https://mujie999999-collab.github.io/mujie-chat/',
+        'X-Title': '沐頡景觀 AI 客服'
+      },
+      body: JSON.stringify({
+        model: 'google/gemini-2.0-flash-exp:free',
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          ...history
+        ],
+        max_tokens: 500,
+        temperature: 0.7
+      })
     });
 
     if (!res.ok) {
@@ -870,28 +849,20 @@ async function sendMsg() {
     }
 
     const data = await res.json();
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text
+    const reply = data.choices?.[0]?.message?.content
       || '抱歉，目前無法取得回應，請稍後再試。';
 
     hideTyping();
     appendMsg('ai', reply);
-    history.push({ role: 'model', parts: [{ text: reply }] });
+    history.push({ role: 'assistant', content: reply });
 
-    // 只保留最近 20 輪對話，避免 token 過多
+    // 只保留最近 20 輪對話
     if (history.length > 40) history = history.slice(-40);
 
   } catch(e) {
     hideTyping();
-    console.error('Gemini error:', e);
-    if (e.message?.includes('API_KEY_INVALID') || e.message?.includes('API key')) {
-      geminiApiKey = '';
-      localStorage.removeItem('gemini_api_key');
-      appendMsg('ai', '❌ API 金鑰無效，請重新輸入正確的 Gemini API 金鑰。');
-      document.getElementById('setupBanner').classList.add('show');
-      document.getElementById('apiSetup').classList.add('show');
-    } else {
-      appendMsg('ai', '抱歉，連線發生問題，請稍後再試，或直接來電 / LINE 聯絡我們 🌿');
-    }
+    console.error('OpenRouter error:', e);
+    appendMsg('ai', '抱歉，連線發生問題，請稍後再試，或直接來電 / LINE 聯絡我們 🌿');
   }
 }
 
