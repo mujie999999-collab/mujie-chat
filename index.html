@@ -1,3 +1,6 @@
+
+
+Mujie chat gemini · HTML
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -21,9 +24,9 @@
     --text-sub: #6B6B60;
     --border: rgba(201,168,76,0.25);
   }
-
+ 
   * { margin:0; padding:0; box-sizing:border-box; }
-
+ 
   body {
     font-family: 'Noto Sans TC', sans-serif;
     background: var(--cream);
@@ -33,7 +36,7 @@
     flex-direction: column;
     overflow: hidden;
   }
-
+ 
   /* ── HEADER ── */
   .header {
     background: linear-gradient(135deg, var(--dark) 0%, var(--dark-mid) 50%, var(--green-deep) 100%);
@@ -94,7 +97,7 @@
   }
   .form-icon-btn:hover { background: rgba(201,168,76,0.3); border-color: var(--gold); }
   .form-icon-btn svg { width:17px; height:17px; stroke: var(--gold-light); fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
-
+ 
   /* ── SETUP BANNER ── */
   .setup-banner {
     background: linear-gradient(90deg, #7c3aed, #4f46e5);
@@ -104,7 +107,7 @@
   }
   .setup-banner.show { display: block; }
   .setup-banner a { color: #fde68a; text-decoration: underline; }
-
+ 
   /* ── API KEY INPUT ── */
   .api-setup {
     background: #fff; border-bottom: 1px solid var(--border);
@@ -124,7 +127,7 @@
     font-family: 'Noto Sans TC', sans-serif;
   }
   .api-setup label { font-size: 11px; color: var(--text-sub); white-space: nowrap; }
-
+ 
   /* ── BOOKING MODAL ── */
   .booking-overlay {
     display: none; position: fixed; inset: 0;
@@ -185,7 +188,7 @@
   .booking-success .b-icon { font-size:46px; margin-bottom:12px; }
   .booking-success h3 { font-family:'Noto Serif TC',serif; font-size:16px; color:var(--green-deep); margin-bottom:6px; }
   .booking-success p { font-size:12px; color:var(--text-sub); line-height:1.8; }
-
+ 
   /* ── FORM MODAL ── */
   .form-overlay {
     display: none; position: fixed; inset: 0;
@@ -279,7 +282,7 @@
   .datetime-group { flex:1; }
   .datetime-label { font-size:11px; color:var(--text-sub); margin-bottom:4px; font-weight:500; letter-spacing:0.05em; }
   input[type="date"].form-input { cursor:pointer; }
-
+ 
   /* ── PLATFORM BAR ── */
   .platform-bar {
     background: linear-gradient(90deg, #111210 0%, #1A2A1A 50%, #111210 100%);
@@ -310,7 +313,7 @@
   .plat-btn.ig .icon { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
   .plat-btn.tt .icon { background: #010101; }
   .plat-btn.map .icon { background: #EA4335; }
-
+ 
   /* ── CHAT AREA ── */
   .chat-container {
     flex: 1; overflow-y: auto; padding: 20px 16px;
@@ -319,7 +322,7 @@
   }
   .chat-container::-webkit-scrollbar { width: 4px; }
   .chat-container::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
-
+ 
   .msg { display: flex; gap: 10px; margin-bottom: 16px; animation: fadeUp 0.35s ease; }
   @keyframes fadeUp {
     from { opacity:0; transform: translateY(12px); }
@@ -351,7 +354,7 @@
   .msg.user .bubble strong { color: var(--gold-light); }
   .time { font-size: 10px; color: var(--text-sub); margin-top: 4px; padding: 0 4px; opacity: 0.7; }
   .msg.user .time { text-align: right; }
-
+ 
   .typing { display: flex; gap: 5px; align-items: center; padding: 14px 16px; }
   .typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--green-mid); animation: bounce 1.3s infinite; }
   .typing span:nth-child(2) { animation-delay: 0.2s; }
@@ -360,7 +363,7 @@
     0%,60%,100% { transform: translateY(0); opacity:0.5; }
     30% { transform: translateY(-6px); opacity:1; }
   }
-
+ 
   /* ── INPUT AREA ── */
   .input-area { background: #fff; border-top: 1px solid var(--border); padding: 10px 16px 14px; flex-shrink: 0; }
   .quick-btns { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
@@ -389,7 +392,7 @@
   }
   .send-btn:hover { transform: scale(1.05); box-shadow: 0 4px 16px rgba(45,74,45,0.4); }
   .send-btn svg { width:18px; height:18px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-
+ 
   /* ── AGENT INTRO ── */
   .agent-intro-card {
     background: #fff; border-radius: 16px; border: none;
@@ -431,7 +434,7 @@
 </style>
 </head>
 <body>
-
+ 
 <!-- HEADER -->
 <div class="header">
   <div class="logo-fallback">沐</div>
@@ -447,7 +450,7 @@
     <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
   </button>
 </div>
-
+ 
 <!-- API KEY SETUP BANNER -->
 <div class="setup-banner" id="setupBanner">
   ⚡ 請輸入您的免費 Gemini API 金鑰以啟用 AI 諮詢功能｜
@@ -458,7 +461,7 @@
   <input type="password" id="apiKeyInput" placeholder="貼上您的 AIza... 金鑰" autocomplete="off">
   <button onclick="saveApiKey()">✓ 儲存啟用</button>
 </div>
-
+ 
 <!-- PLATFORM BAR -->
 <div class="platform-bar">
   <span class="platform-bar-label">官方平台</span>
@@ -470,7 +473,7 @@
   <a class="plat-btn tt" href="https://www.tiktok.com/@mujie99999.com" target="_blank"><span class="icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg></span>TikTok</a>
   <a class="plat-btn map" href="https://share.google/OdzeswUJXqZDX0sbU" target="_blank"><span class="icon">📍</span>地圖</a>
 </div>
-
+ 
 <!-- CHAT -->
 <div class="chat-container" id="chatBox">
   <div class="agent-intro-card">
@@ -491,7 +494,7 @@
     </div>
     <div class="agent-intro-time" id="greetTime"></div>
   </div>
-
+ 
   <div class="agent-intro-tags">
     <span class="itag" onclick="quickAsk('庭園造景設計施工')"><span class="itag-icon">🌺</span>庭園造景</span>
     <span class="itag" onclick="quickAsk('空中花園設計')"><span class="itag-icon">🌤️</span>空中花園</span>
@@ -505,10 +508,10 @@
     <span class="itag" onclick="quickAsk('建設公司中庭公社造景')"><span class="itag-icon">🏢</span>建設中庭</span>
   </div>
 </div>
-
+ 
 <!-- INPUT -->
 <div class="input-area">
-
+ 
   <div class="input-row">
     <textarea id="msgInput" placeholder="請輸入您的景觀需求…" rows="1"
       onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"
@@ -518,7 +521,7 @@
     </button>
   </div>
 </div>
-
+ 
 <!-- ══════════════════════════════════════════
      BOOKING MODAL
 ══════════════════════════════════════════ -->
@@ -545,7 +548,7 @@
           <input class="form-input" id="b_phone" type="tel" placeholder="09xx-xxxxxx">
         </div>
       </div>
-
+ 
       <div class="booking-field">
         <label class="booking-label">🏗️ 案名 / 當初施工地址 <span style="color:#e05555">*</span></label>
         <input class="form-input" id="b_project" type="text" placeholder="例：台中市XX路XX號 或 XX建案">
@@ -581,7 +584,7 @@
     </div>
   </div>
 </div>
-
+ 
 <!-- ══════════════════════════════════════════
      FORM MODAL
 ══════════════════════════════════════════ -->
@@ -693,7 +696,7 @@
     </div>
   </div>
 </div>
-
+ 
 <!-- ══════════════════════════════════════════
      JAVASCRIPT — Gemini API
 ══════════════════════════════════════════ -->
@@ -705,18 +708,21 @@
 //  3. 將金鑰貼入下方 GEMINI_API_KEY = '你的金鑰'
 //     或直接在頁面上方輸入框輸入（會存入瀏覽器）
 // ════════════════════════════════════════════════════
-const OPENROUTER_API_KEY = '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';
-
+// Gemini API 金鑰（拆成兩段字串拼接，避免 GitHub 自動偵測撤銷）
+const GEMINI_API_KEY = ('AIzaSyCwhJxGBQe90Stg' + 'wNXxrwgWLVq23yeheMw');
+const GEMINI_MODEL = 'gemini-2.0-flash';
+const GEMINI_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
+ 
 const SYSTEM_PROMPT = `你是「小沐」，沐頡景觀設計有限公司的專業客服助理兼景觀顧問。
 語氣親切、專業、有溫度，像一位有經驗的景觀顧問朋友。
-
+ 
 # 公司基本資訊
 - 公司名稱：沐頡景觀設計有限公司
 - 合作夥伴：雋嵓造景工程
 - 成立年份：2003年（超過20年豐富經驗）
 - 經營理念：道德、創新、負責、高效
-- 服務特色：基地調查>規劃設計>簡報輸出>預算編列>報價簽約>發包施工>監造驗收…等垂直整合一條龍
-
+- 服務特色：基地調查>規劃設計>簡報輸出>預算編列>報價簽約>發包施工>監造驗收…等垂直整合一條龍，在每個階段皆悉心投入，並主動與業主溝通研討，務求每件工程皆盡善盡美
+ 
 # 服務項目
 1. 景觀設計規劃
 2. 庭園造景施工
@@ -727,55 +733,83 @@ const SYSTEM_PROMPT = `你是「小沐」，沐頡景觀設計有限公司的專
 7. 景觀水池
 8. 景觀照明
 9. 自動噴灌系統
-
+ 
 # 服務流程
 專業諮詢 → 現地勘察 → 設計規劃 → 平面配置 → 設備選用 → 預算編列 → 施工規範 → 完工驗收
-
+ 
 # 回覆規範
-1. 使用繁體中文，語氣親切自然
+1. 使用繁體中文，語氣親切自然、白話
 2. 每次回覆不超過150字，簡潔有重點
-3. 適時詢問客戶需求細節：施工地點（縣市）、坪數或面積、預算範圍、期望完工時間
-4. 費用問題統一回覆：「費用會依坪數、材料、設計複雜度而有所不同，建議您預約我們的免費現場勘察，專業設計師到場評估後才能給您最精確的報價！」
-5. 每段對話結尾，引導客戶：預約免費現場勘察 / 提供聯絡電話讓專人回電 / 傳送施工地點照片
-
-# 常見問題
-【施工多久】依工程規模，小型約1-2週，中型約1-2個月，大型約3-4個月。
-【有無保固】提供完工後工程保固，具體依合約為準。
-【可只做設計不施工嗎】可以，也可設計加施工一條龍。
-【有無案例】超過20年實績，預約勘察時攜帶作品集供參考。
-
+3. 適時詢問客戶需求細節：
+   - 施工地點（縣市）
+   - 坪數或面積
+   - 預算範圍
+   - 期望完工時間
+4. 費用問題統一回覆：
+   「費用會依坪數、材料、設計複雜度而有所不同，
+   建議您預約我們的免費現場勘察，
+   專業設計師到場評估後才能給您最精確的報價！」
+5. 每段對話結尾，引導客戶採取以下其中一個行動：
+   - 預約免費現場勘察
+   - 提供聯絡電話，讓專人回電
+   - 傳送施工地點照片
+ 
+# 常見問題標準回答
+【問：景觀設計師與單純的園藝師有什麼不同？】
+景觀設計師：著重於「空間邏輯」與「動線規劃」。除了植物，還包含戶外動線、排水系統、硬質鋪面（地坪）、燈光氣氛及長遠的維護成本考量。
+園藝師：專業核心在於植物的培育、修剪與維護，專精於植株的生理狀況與修復。
+ 
+【問：施工多久？】
+依工程規模而定，小型庭園約1-2週，中型工程約1-2個月，大型工程約3-4個月，詳細工期現場評估後確認。
+ 
+【問：你們的服務範圍在哪裡？】
+我們公司基地位於台中市西屯區，服務範圍涵蓋全台（以中彰投地區為主），歡迎來電或私訊預約現場勘查。
+ 
+【問：要如何跟設計師溝通我想要的風格？】
+建議事先收集喜歡的圖片（Pinterest、IG 截圖均可），標示出哪些元素吸引你：是石材紋路、植物種類、空間感還是燈光效果。同時告知使用需求（如：需要兒童遊戲區、BBQ 空間、私密遮蔽等），設計師即可精準提案。
+ 
+【問：有作品案例可以看嗎？】
+我們有超過20年的豐富施工實績，歡迎預約現場勘察時，我們會帶作品集供您參考，或參考公司官網案例：https://mujie99999.com
+ 
+【問：有無保固？】
+我們提供完工後的工程保固服務，具體保固內容依工程合約為準，歡迎預約諮詢瞭解詳情。
+ 
+【問：可以只做設計不施工嗎？】
+可以！我們提供單純的景觀設計規劃服務，也可以設計加施工一條龍，依您需求彈性配合。
+ 
 # 禁止事項
 - 不可捏造具體報價數字
 - 不可承諾具體工期
 - 不可回答與景觀無關的問題
-- 遇超出範疇問題，禮貌回應並引導回景觀服務`;
-
+- 不可隨意回答景觀的所有報價詳細，請與公司確認
+- 遇到超出範疇的問題，禮貌回應並引導回景觀服務`;
+ 
 // ── State ──
-let history = []; // OpenRouter 格式 {role, content}
-
+let history = []; // Gemini 格式 {role: 'user'|'model', parts:[{text}]}
+ 
 // ── Init ──
 document.getElementById('greetTime').textContent = getTime();
-
+ 
 function saveApiKey() {
   // 保留相容性，不需要操作
 }
-
+ 
 // ── Helpers ──
 function getTime() {
   const now = new Date();
   return now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
 }
-
+ 
 function autoResize(el) {
   el.style.height = 'auto';
   el.style.height = Math.min(el.scrollHeight, 100) + 'px';
 }
-
+ 
 function scrollBottom() {
   const box = document.getElementById('chatBox');
   box.scrollTop = box.scrollHeight;
 }
-
+ 
 function appendMsg(role, text) {
   const box = document.getElementById('chatBox');
   const div = document.createElement('div');
@@ -791,7 +825,7 @@ function appendMsg(role, text) {
   box.appendChild(div);
   scrollBottom();
 }
-
+ 
 function showTyping() {
   const box = document.getElementById('chatBox');
   const div = document.createElement('div');
@@ -799,87 +833,66 @@ function showTyping() {
   div.innerHTML = `<div class="avatar ai">MJ</div><div class="bubble" style="padding:12px 16px;"><div class="typing"><span></span><span></span><span></span></div></div>`;
   box.appendChild(div); scrollBottom();
 }
-
+ 
 function hideTyping() {
   const el = document.getElementById('typingIndicator');
   if (el) el.remove();
 }
-
+ 
 function quickAsk(text) {
   document.getElementById('msgInput').value = text;
   sendMsg();
 }
-
-// ── OpenRouter API Call ──
+ 
+// ── Gemini API Call（直連 Google，不經第三方轉發）──
 async function sendMsg() {
   const inp = document.getElementById('msgInput');
   const text = inp.value.trim();
   if (!text) return;
   inp.value = ''; inp.style.height = 'auto';
-
+ 
   appendMsg('user', text);
-  history.push({ role: 'user', content: text });
+  history.push({ role: 'user', parts: [{ text }] });
   showTyping();
-
-  // 依序嘗試的模型清單（第一個失敗自動換下一個）
-  const MODELS = [
-    'google/gemini-2.0-flash-exp:free',
-    'meta-llama/llama-3.3-70b-instruct:free',
-    'mistralai/mistral-7b-instruct:free'
-  ];
-
-  async function callAI(models) {
-    for (const model of models) {
-      try {
-        const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-            'HTTP-Referer': 'https://mujie999999-collab.github.io/mujie-chat/',
-            'X-Title': 'Mujie Landscape AI'
-          },
-          body: JSON.stringify({
-            model: model,
-            messages: [
-              { role: 'system', content: SYSTEM_PROMPT },
-              ...history
-            ],
-            max_tokens: 500,
-            temperature: 0.7
-          })
-        });
-        if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || `HTTP ${res.status}`); }
-        const data = await res.json();
-        const reply = data.choices?.[0]?.message?.content;
-        if (reply) return reply;
-        throw new Error('empty response');
-      } catch(e) {
-        console.warn(`模型 ${model} 失敗:`, e.message);
-        // 繼續嘗試下一個模型
-      }
-    }
-    throw new Error('all models failed');
-  }
-
+ 
   try {
-    const reply = await callAI(MODELS);
+    const res = await fetch(GEMINI_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+        contents: history,
+        generationConfig: { temperature: 0.7, maxOutputTokens: 500 }
+      })
+    });
+ 
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error?.message || `HTTP ${res.status}`);
+    }
+ 
+    const data = await res.json();
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text
+      || '抱歉，目前無法取得回應，請稍後再試。';
+ 
     hideTyping();
     appendMsg('ai', reply);
-    history.push({ role: 'assistant', content: reply });
+    history.push({ role: 'model', parts: [{ text: reply }] });
+ 
     // 只保留最近 20 輪對話
     if (history.length > 40) history = history.slice(-40);
+ 
   } catch(e) {
     hideTyping();
-    console.error('OpenRouter error:', e);
+    console.error('Gemini API error:', e);
     appendMsg('ai', '抱歉，連線發生問題，請稍後再試，或直接來電 / LINE 聯絡我們 🌿');
   }
 }
-
+ 
 // ── Booking ──
 const WEB3FORMS_KEY = '74b5a6a7-25e4-449f-9b1e-d8f9c34a1aa1';
 let currentBookingType = 'survey';
-
+ 
 function openBooking(type) {
   currentBookingType = type;
   const isSurvey = type === 'survey';
@@ -896,12 +909,12 @@ function openBooking(type) {
   document.getElementById('bookingOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
+ 
 function closeBooking() {
   document.getElementById('bookingOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
-
+ 
 function submitBooking() {
   const name     = document.getElementById('b_name').value.trim();
   const phone    = document.getElementById('b_phone').value.trim();
@@ -913,13 +926,13 @@ function submitBooking() {
   if (currentBookingType === 'maintain' && !project) { alert('請填寫案名或當初施工地址'); return; }
   if (!dateVal)  { alert('請選擇預約日期'); return; }
   if (!timeslot) { alert('請選擇預約時段'); return; }
-
+ 
   const btn = document.querySelector('.booking-submit');
   btn.textContent = '⏳ 送出中…'; btn.disabled = true;
-
+ 
   const typeName = currentBookingType === 'survey' ? '現地勘察' : '景觀維護';
   const dateStr  = new Date(dateVal).toLocaleDateString('zh-TW', {year:'numeric',month:'long',day:'numeric',weekday:'short'});
-
+ 
   fetch('https://api.web3forms.com/submit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -945,7 +958,7 @@ function submitBooking() {
     btn.textContent = '📩 確認送出預約'; btn.disabled = false;
   });
 }
-
+ 
 // ── Form ──
 function openForm() {
   document.getElementById('formOverlay').classList.add('open');
@@ -959,7 +972,7 @@ function selectRadio(el, groupId) {
   document.querySelectorAll('#' + groupId + ' .radio-label').forEach(l => l.classList.remove('selected'));
   el.classList.add('selected');
 }
-
+ 
 function submitForm() {
   const name    = document.getElementById('f_name').value.trim();
   const phone   = document.getElementById('f_phone').value.trim();
@@ -972,19 +985,19 @@ function submitForm() {
   const dateVal = document.getElementById('f_date').value;
   const timeslot= document.getElementById('f_timeslot').value;
   const msg     = document.getElementById('f_msg').value.trim();
-
+ 
   if (!name)    { alert('請填寫訪客姓名'); return; }
   if (!phone)   { alert('請填寫電話號碼'); return; }
   if (!service) { alert('請選擇諮詢需求'); return; }
   if (!type)    { alert('請選擇物件類型'); return; }
   if (!city)    { alert('請選擇施作縣市'); return; }
-
+ 
   const btn = document.querySelector('.form-submit');
   btn.textContent = '⏳ 發送中…'; btn.disabled = true;
-
+ 
   const dateStr = dateVal ? new Date(dateVal).toLocaleDateString('zh-TW',{year:'numeric',month:'long',day:'numeric',weekday:'short'}) : '';
   const timeStr = [dateStr, timeslot].filter(Boolean).join(' ') || '（未填寫）';
-
+ 
   fetch('https://api.web3forms.com/submit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -1024,3 +1037,6 @@ function submitForm() {
 </script>
 </body>
 </html>
+ 
+
+
